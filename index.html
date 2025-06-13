@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Box Counter</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, sans-serif;
+            background: #f9f9f9;
+            height: 100vh;
+            box-sizing: border-box;
+        }
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .top-half {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 0;
+        }
+        .top-row {
+            display: flex;
+            width: 100%;
+            max-width: 480px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .left-buttons, .right-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+        .left-buttons {
+            flex: 0 0 auto;
+            gap: 8px;
+        }
+        .right-buttons {
+            flex: 0 0 auto;
+        }
+        .middle-counter {
+            flex: 1 1 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            color: #222;
+            min-width: 0;
+            padding: 0 8px;
+            text-align: center;
+        }
+        button {
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            padding: 12px 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            outline: none;
+            min-width: 48px;
+            min-height: 48px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .btn-red-primary {
+            background: #e53935;
+            color: #fff;
+        }
+        .btn-red-primary:active {
+            background: #b71c1c;
+        }
+        .btn-red-secondary {
+            background: #ffcdd2;
+            color: #b71c1c;
+        }
+        .btn-red-secondary:active {
+            background: #ef9a9a;
+        }
+        .btn-green-primary {
+            background: #43a047;
+            color: #fff;
+        }
+        .btn-green-primary:active {
+            background: #1b5e20;
+        }
+        .bottom-half {
+            flex: 1;
+            display: flex;
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+            gap: 12px;
+            padding: 0 8px 12px 8px;
+            box-sizing: border-box;
+        }
+        .btn-blue-primary {
+            background: #1976d2;
+            color: #fff;
+            font-size: 1.5rem;
+        }
+        .btn-blue-primary:active {
+            background: #0d47a1;
+        }
+        .btn-blue-secondary {
+            background: #bbdefb;
+            color: #1976d2;
+            font-size: 1.5rem;
+        }
+        .btn-blue-secondary:active {
+            background: #90caf9;
+        }
+        .bottom-btn {
+            flex: 1 1 0;
+            height: 100%;
+            border-radius: 18px;
+            margin-top: 8px;
+        }
+        @media (max-width: 480px) {
+            .top-row, .bottom-half {
+                max-width: 100vw;
+            }
+            .middle-counter {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-half">
+        <div class="top-row">
+            <div class="left-buttons">
+                <button class="btn-red-primary" onclick="updateCounter(-1)">-1</button>
+                <button class="btn-red-secondary" onclick="updateCounter(-5)">-5</button>
+                <button class="btn-red-secondary" onclick="updateCounter(-10)">-10</button>
+            </div>
+            <div class="middle-counter" id="counter">0</div>
+            <div class="right-buttons">
+                <button class="btn-green-primary" onclick="updateCounter(1)">+1</button>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-half">
+        <button class="btn-blue-primary bottom-btn" onclick="updateCounter(10)">+10</button>
+        <button class="btn-blue-secondary bottom-btn" onclick="updateCounter(5)">+5</button>
+    </div>
+    <div style="width:100%;max-width:480px;margin:0 auto 12px auto;padding:0 8px;box-sizing:border-box;">
+        <button class="btn-red-primary bottom-btn" style="width:100%;" onclick="resetCounter()">Reset</button>
+    </div>
+    <script>
+        function resetCounter() {
+            total = 0;
+            counterEl.textContent = total;
+        }
+    </script>
+    <script>
+        let total = 0;
+        const counterEl = document.getElementById('counter');
+        function updateCounter(amount) {
+            total += amount;
+            if (total < 0) {
+                total = 0; // Prevent negative counts
+            }
+            counterEl.textContent = total;
+        }
+    </script>
+</body>
+</html>
